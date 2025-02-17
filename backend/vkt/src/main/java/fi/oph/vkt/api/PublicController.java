@@ -8,6 +8,7 @@ import fi.oph.vkt.api.dto.PublicEnrollmentInitialisationDTO;
 import fi.oph.vkt.api.dto.PublicExamEventDTO;
 import fi.oph.vkt.api.dto.PublicPersonDTO;
 import fi.oph.vkt.api.dto.PublicReservationDTO;
+import fi.oph.vkt.config.Constants;
 import fi.oph.vkt.model.Enrollment;
 import fi.oph.vkt.model.FeatureFlag;
 import fi.oph.vkt.model.Person;
@@ -22,11 +23,14 @@ import fi.oph.vkt.service.PublicEnrollmentService;
 import fi.oph.vkt.service.PublicExamEventService;
 import fi.oph.vkt.service.PublicPersonService;
 import fi.oph.vkt.service.PublicReservationService;
+import fi.oph.vkt.service.email.EmailData;
+import fi.oph.vkt.service.email.sender.EmailSenderViestintapalveluNew;
 import fi.oph.vkt.service.koski.KoskiService;
 import fi.oph.vkt.util.SessionUtil;
 import fi.oph.vkt.util.UIRouteUtil;
 import fi.oph.vkt.util.exception.APIException;
 import fi.oph.vkt.util.exception.NotFoundException;
+import fi.vm.sade.javautils.nio.cas.CasClient;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -324,6 +328,23 @@ public class PublicController {
       callback,
       httpResponse,
       paymentService::getFinalizePaymentSuccessRedirectUrl
+    );
+  }
+
+  @GetMapping(path = "/debug/email")
+  public void paymentCancel(
+          final CasClient casClient
+  ) throws IOException {
+    final EmailSenderViestintapalveluNew emailSenderViestintapalveluNew = new EmailSenderViestintapalveluNew(casClient, Constants.SERVICENAME, Constants.EMAIL_SENDER_NAME);
+    emailSenderViestintapalveluNew.sendEmail(
+      EmailData
+        .builder()
+        .id(1L)
+        .subject("test")
+        .recipientAddress("test@test.invalid")
+        .recipientName("Test")
+        .body("This is a test")
+        .build()
     );
   }
 

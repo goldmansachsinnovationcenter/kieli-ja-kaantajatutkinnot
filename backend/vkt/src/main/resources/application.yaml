@@ -86,6 +86,7 @@ app:
   email:
     sending-enabled: ${email.sending-enabled:false}
     service-url: ${email.service-url:null}
+    viestinvalitys-url: ${email.service-url:null}
     user: ${koski.user:null}
     password: ${koski.password:null}
   koski:
@@ -101,3 +102,9 @@ app:
     freeEnrollmentAllowed: ${feature-flags.free-enrollment-allowed:false}
   aws:
     s3-bucket: ${aws.s3-bucket:test}
+  onr:
+    service-url: ${onr.service-url:https://virkailija.untuvaopintopolku.fi/oppijanumerorekisteri-service}
+    cas:
+      endpoint: ${onr.endpoint:https://virkailija.untuvaopintopolku.fi/cas}
+      username: ${cas.username:vkt}
+      password: ${cas.password:password}

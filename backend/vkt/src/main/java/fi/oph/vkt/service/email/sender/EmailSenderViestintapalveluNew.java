@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.oph.vkt.service.email.EmailAttachmentData;
 import fi.oph.vkt.service.email.EmailData;
 import fi.vm.sade.javautils.nio.cas.CasClient;
+
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -38,7 +40,7 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
       .setUrl("url")
       .setMethod("POST")
       .setBody(objectMapper.writeValueAsString(postData))
-      .setRequestTimeout(10000)
+      .setRequestTimeout(Duration.ofMillis(10000))
       .addHeader("Caller-Id", callerId)
       .addHeader("Content-Type", "application/json")
       .addHeader("Accept", "application/json")

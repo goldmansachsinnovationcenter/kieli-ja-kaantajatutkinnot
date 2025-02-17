@@ -31,6 +31,7 @@ public class ExamEventXlsxView extends AbstractXlsxView {
     final @NonNull HttpServletResponse response
   ) {
     setFilenameHeader(response, String.format("VKT_tilaisuus_%s_%s.xlsx", data.date(), data.language()));
+    response.setHeader("Cache-Control", "no-cache, no-store, private, max-age=0, must-revalidate");
     writeExcel(workbook);
   }
 
@@ -45,6 +46,7 @@ public class ExamEventXlsxView extends AbstractXlsxView {
       "Ilmoittautumisaika",
       "Sukunimi",
       "Etunimi",
+      "Henkilötunnus",
       "Aiempi tutkintopäivä",
       "Tila",
       "KT", // Kirjallinen taito
@@ -84,6 +86,7 @@ public class ExamEventXlsxView extends AbstractXlsxView {
       row.createCell(++ci).setCellValue(dataRow.enrollmentTime());
       row.createCell(++ci).setCellValue(dataRow.lastName());
       row.createCell(++ci).setCellValue(dataRow.firstName());
+      row.createCell(++ci).setCellValue(dataRow.ssn());
       setNullableValue(row.createCell(++ci), dataRow.previousEnrollment());
       row.createCell(++ci).setCellValue(dataRow.status());
       row.createCell(++ci).setCellValue(dataRow.textualSkill());
