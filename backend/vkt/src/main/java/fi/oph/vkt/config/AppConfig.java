@@ -107,8 +107,8 @@ public class AppConfig {
     final CasConfig casConfig = new CasConfig.CasConfigBuilder(
       environment.getRequiredProperty("app.onr.cas.username"),
       environment.getRequiredProperty("app.onr.cas.password"),
-      environment.getRequiredProperty("app.onr.cas.endpoint"),
-      environment.getRequiredProperty("app.email.viestinvalitys-url"),
+      environment.getRequiredProperty("app.onr.cas.endpoint-url"),
+      environment.getRequiredProperty("app.email.viestinvalitys-url") + "/lahetys/login/j_spring_cas_security_check",
       "CSRF",
       Constants.CALLER_ID,
       ""

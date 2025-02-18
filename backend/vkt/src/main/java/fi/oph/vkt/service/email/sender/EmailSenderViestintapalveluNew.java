@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+
 import lombok.RequiredArgsConstructor;
 import org.asynchttpclient.Request;
 import org.asynchttpclient.RequestBuilder;
@@ -32,14 +34,15 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
   private final String sender;
 
   @Override
-  public String sendEmail(final EmailData emailData) throws JsonProcessingException {
+  public String sendEmail(final EmailData emailData) throws JsonProcessingException, ExecutionException, InterruptedException {
     final ObjectMapper objectMapper = new ObjectMapper();
     final Map<String, Object> postData = createPostData(emailData);
+    final String body = objectMapper.writeValueAsString(postData);
 
     final Request request = new RequestBuilder()
-      .setUrl("url")
+      .setUrl("https://viestinvalitys.testiopintopolku.fi/lahetys/v1/viestit")
       .setMethod("POST")
-      .setBody(objectMapper.writeValueAsString(postData))
+      .setBody(body)
       .setRequestTimeout(Duration.ofMillis(10000))
       .addHeader("Caller-Id", callerId)
       .addHeader("Content-Type", "application/json")
@@ -52,7 +55,9 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
       if (response.getStatusCode() == HttpConstants.ResponseStatusCodes.OK_200) {
         return parseExternalId(response.getResponseBody());
       }
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      throw e;
+    }
 
     return null;
   }
@@ -69,9 +74,9 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
 
     return Map.of(
       "sisallonTyyppi",
-      true,
+      "html",
       "lahettavaPalvelu",
-      sender,
+      "vkt",
       "lahettaja",
       senderFields,
       "otsikko",
@@ -85,9 +90,9 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
       "sailytysaika",
       expirationDays,
       "idempotencyKey",
-      emailKeyPrefix + emailData.id(),
-      "attachments",
-      createAttachments(emailData.attachments())
+      emailKeyPrefix + emailData.id()
+      //"attachments",
+      //createAttachments(emailData.attachments())
     );
   }
 

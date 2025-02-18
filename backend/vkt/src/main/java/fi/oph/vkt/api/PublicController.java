@@ -41,6 +41,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
@@ -90,6 +91,9 @@ public class PublicController {
 
   @Resource
   private FeatureFlagService featureFlagService;
+
+  @Resource
+  private CasClient casClient;
 
   @GetMapping(path = "/examEvent")
   public List<PublicExamEventDTO> list() {
@@ -332,9 +336,8 @@ public class PublicController {
   }
 
   @GetMapping(path = "/debug/email")
-  public void paymentCancel(
-          final CasClient casClient
-  ) throws IOException {
+  public void email(
+  ) throws IOException, ExecutionException, InterruptedException {
     final EmailSenderViestintapalveluNew emailSenderViestintapalveluNew = new EmailSenderViestintapalveluNew(casClient, Constants.SERVICENAME, Constants.EMAIL_SENDER_NAME);
     emailSenderViestintapalveluNew.sendEmail(
       EmailData
@@ -344,6 +347,7 @@ public class PublicController {
         .recipientAddress("test@test.invalid")
         .recipientName("Test")
         .body("This is a test")
+        .attachments(List.of())
         .build()
     );
   }
