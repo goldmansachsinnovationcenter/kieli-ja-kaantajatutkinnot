@@ -1,5 +1,6 @@
 package fi.oph.vkt.api;
 
+import static fi.oph.vkt.util.LocalisationUtil.localeFI;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fi.oph.vkt.api.dto.PublicEducationDTO;
 import fi.oph.vkt.api.dto.PublicEnrollmentCreateDTO;
@@ -16,6 +17,7 @@ import fi.oph.vkt.model.type.AppLocale;
 import fi.oph.vkt.model.type.EnrollmentType;
 import fi.oph.vkt.model.type.ExamLevel;
 import fi.oph.vkt.model.type.FreeEnrollmentType;
+import fi.oph.vkt.repository.EnrollmentRepository;
 import fi.oph.vkt.service.FeatureFlagService;
 import fi.oph.vkt.service.PaymentService;
 import fi.oph.vkt.service.PublicAuthService;
@@ -23,9 +25,13 @@ import fi.oph.vkt.service.PublicEnrollmentService;
 import fi.oph.vkt.service.PublicExamEventService;
 import fi.oph.vkt.service.PublicPersonService;
 import fi.oph.vkt.service.PublicReservationService;
+import fi.oph.vkt.service.email.EmailAttachmentData;
 import fi.oph.vkt.service.email.EmailData;
 import fi.oph.vkt.service.email.sender.EmailSenderViestintapalveluNew;
 import fi.oph.vkt.service.koski.KoskiService;
+import fi.oph.vkt.service.receipt.ReceiptData;
+import fi.oph.vkt.service.receipt.ReceiptRenderer;
+import fi.oph.vkt.util.LocalisationUtil;
 import fi.oph.vkt.util.SessionUtil;
 import fi.oph.vkt.util.UIRouteUtil;
 import fi.oph.vkt.util.exception.APIException;
@@ -39,6 +45,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -94,6 +101,12 @@ public class PublicController {
 
   @Resource
   private CasClient casClient;
+
+  @Resource
+  private EnrollmentRepository enrollmentRepository;
+
+  @Resource
+  private ReceiptRenderer receiptRenderer;
 
   @GetMapping(path = "/examEvent")
   public List<PublicExamEventDTO> list() {
@@ -339,6 +352,16 @@ public class PublicController {
   public void email(
   ) throws IOException, ExecutionException, InterruptedException {
     final EmailSenderViestintapalveluNew emailSenderViestintapalveluNew = new EmailSenderViestintapalveluNew(casClient, Constants.SERVICENAME, Constants.EMAIL_SENDER_NAME);
+
+    final byte[] receiptBytes = "test".getBytes();
+
+    final EmailAttachmentData emailAttachmentData = EmailAttachmentData
+            .builder()
+            .name("test.txt")
+            .contentType("text/plain")
+            .data(receiptBytes)
+            .build();
+
     emailSenderViestintapalveluNew.sendEmail(
       EmailData
         .builder()
@@ -347,7 +370,7 @@ public class PublicController {
         .recipientAddress("test@test.invalid")
         .recipientName("Test")
         .body("This is a test")
-        .attachments(List.of())
+        .attachments(List.of(emailAttachmentData))
         .build()
     );
   }
