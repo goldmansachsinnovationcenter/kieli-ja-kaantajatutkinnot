@@ -6,14 +6,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.oph.vkt.service.email.EmailAttachmentData;
 import fi.oph.vkt.service.email.EmailData;
 import fi.vm.sade.javautils.nio.cas.CasClient;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
-
 import lombok.RequiredArgsConstructor;
 import org.asynchttpclient.Request;
 import org.asynchttpclient.RequestBuilder;
@@ -32,15 +30,18 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
 
   private final String sender;
 
+  private final String apiUrl;
+
   @Override
-  public String sendEmail(final EmailData emailData) throws JsonProcessingException, ExecutionException, InterruptedException {
+  public String sendEmail(final EmailData emailData)
+    throws JsonProcessingException, ExecutionException, InterruptedException {
     final ObjectMapper objectMapper = new ObjectMapper();
     final List<String> attachments = createAndPostAttachments(emailData.attachments());
     final Map<String, Object> postData = createPostData(emailData, attachments);
     final String body = objectMapper.writeValueAsString(postData);
 
     final Request request = new RequestBuilder()
-      .setUrl("https://viestinvalitys.testiopintopolku.fi/lahetys/v1/viestit")
+      .setUrl(apiUrl + "/lahetys/v1/viestit")
       .setMethod("POST")
       .setBody(body)
       .setRequestTimeout(Duration.ofSeconds(10))
@@ -96,9 +97,10 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
     );
   }
 
-  private String postAttachment(final EmailAttachmentData attachment) throws ExecutionException, InterruptedException, JsonProcessingException {
+  private String postAttachment(final EmailAttachmentData attachment)
+    throws ExecutionException, InterruptedException, JsonProcessingException {
     final Request request = new RequestBuilder()
-      .setUrl("https://viestinvalitys.testiopintopolku.fi/lahetys/v1/liitteet")
+      .setUrl(apiUrl + "/lahetys/v1/liitteet")
       .setMethod("POST")
       .addBodyPart(new ByteArrayPart("liite", attachment.data(), attachment.contentType(), null, attachment.name()))
       .setRequestTimeout(Duration.ofSeconds(10))
