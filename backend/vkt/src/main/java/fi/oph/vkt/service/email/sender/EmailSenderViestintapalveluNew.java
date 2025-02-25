@@ -26,10 +26,6 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
 
   private final CasClient casClient;
 
-  private final String callerId;
-
-  private final String sender;
-
   private final String apiUrl;
 
   @Override
@@ -44,7 +40,7 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
       .setMethod("POST")
       .setBody(body)
       .setRequestTimeout(Duration.ofSeconds(10))
-      .addHeader("Caller-Id", callerId)
+      .addHeader("Caller-Id", Constants.CALLER_ID)
       .addHeader("Content-Type", "application/json")
       .addHeader("Accept", "application/json")
       .build();
@@ -65,7 +61,12 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
   }
 
   private Map<String, Object> createPostData(final EmailData emailData, final List<String> attachments) {
-    final Map<String, Object> senderFields = Map.of("nimi", sender, "sahkopostiOsoite", Constants.EMAIL_SENDER_ADDRESS);
+    final Map<String, Object> senderFields = Map.of(
+      "nimi",
+      Constants.EMAIL_SENDER_NAME,
+      "sahkopostiOsoite",
+      Constants.EMAIL_SENDER_ADDRESS
+    );
 
     final List<Map<String, String>> recipientFields = List.of(
       Map.of("nimi", emailData.recipientName(), "sahkopostiOsoite", emailData.recipientAddress())
@@ -101,7 +102,7 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
       .setMethod("POST")
       .addBodyPart(new ByteArrayPart("liite", attachment.data(), attachment.contentType(), null, attachment.name()))
       .setRequestTimeout(Duration.ofSeconds(10))
-      .addHeader("Caller-Id", callerId)
+      .addHeader("Caller-Id", Constants.CALLER_ID)
       .addHeader("Content-Type", "multipart/form-data")
       .addHeader("Accept", "application/json")
       .build();

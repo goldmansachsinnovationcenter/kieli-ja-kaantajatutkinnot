@@ -70,12 +70,7 @@ public class AppConfig {
         emailServiceUrl + "/lahetys/login/j_spring_cas_security_check"
       );
 
-      return new EmailSenderViestintapalveluNew(
-        casClient,
-        Constants.SERVICENAME,
-        Constants.EMAIL_SENDER_NAME,
-        emailServiceUrl
-      );
+      return new EmailSenderViestintapalveluNew(casClient, emailServiceUrl);
     } else {
       final WebClient webClient = webClientBuilderWithCallerId("email-sender-connection-provider")
         .baseUrl(emailServiceUrl)
