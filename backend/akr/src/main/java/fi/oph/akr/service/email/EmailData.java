@@ -16,6 +16,7 @@ public record EmailData(
   public static EmailData createFromEmail(final Email email) {
     return EmailData
       .builder()
+      .id(email.getId())
       .recipientName(email.getRecipientName())
       .recipientAddress(email.getRecipientAddress())
       .subject(email.getSubject())
