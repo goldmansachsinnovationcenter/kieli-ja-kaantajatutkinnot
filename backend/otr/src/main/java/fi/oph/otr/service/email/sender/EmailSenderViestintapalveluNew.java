@@ -76,7 +76,7 @@ public class EmailSenderViestintapalveluNew implements EmailSender {
       "sisallonTyyppi",
       "html",
       "lahettavaPalvelu",
-      Constants.SERVICENAME,
+      "vkt",
       "lahettaja",
       senderFields,
       "otsikko",
