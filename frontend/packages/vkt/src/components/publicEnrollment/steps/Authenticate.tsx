@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CustomButton, LoadingProgressIndicator } from 'shared/components';
+import { CustomButton, CustomFAB, LoadingProgressIndicator } from 'shared/components';
 import { Color, Variant } from 'shared/enums';
 
 import { useCommonTranslation, usePublicTranslation } from 'configs/i18n';
@@ -38,16 +38,15 @@ export const Authenticate = ({ examEvent }: { examEvent: PublicExamEvent }) => {
         translateCommon={translateCommon}
         isLoading={isAuthRedirecting}
       >
-        <CustomButton
+        <CustomFAB
           data-testid="public-enrollment__authenticate-button"
           className="public-enrollment__grid__form-container__auth-button"
-          variant={Variant.Contained}
-          color={Color.Secondary}
+          color="secondary"
           onClick={onAuthenticate}
           disabled={isAuthRedirecting}
         >
           {t('auth')}
-        </CustomButton>
+        </CustomFAB>
       </LoadingProgressIndicator>
       <CustomButton
         className="public-enrollment__grid__form-container__auth-button"

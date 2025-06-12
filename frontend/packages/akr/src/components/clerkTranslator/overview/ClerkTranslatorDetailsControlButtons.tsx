@@ -1,6 +1,6 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { FC } from 'react';
-import { CustomButton, LoadingProgressIndicator } from 'shared/components';
+import { CustomButton, CustomFAB, LoadingProgressIndicator } from 'shared/components';
 import { APIResponseStatus, Color, Variant } from 'shared/enums';
 
 import { useCommonTranslation } from 'configs/i18n';
@@ -54,15 +54,14 @@ export const ControlButtons: FC<ControlButtonsProps> = ({
           {translateCommon('cancel')}
         </CustomButton>
         <LoadingProgressIndicator isLoading={isLoading}>
-          <CustomButton
+          <CustomFAB
             data-testid="clerk-translator-overview__translator-details__save-btn"
-            variant={Variant.Contained}
-            color={Color.Secondary}
+            color="secondary"
             onClick={onSave}
             disabled={isLoading || !hasRequiredDetails}
           >
             {translateCommon('save')}
-          </CustomButton>
+          </CustomFAB>
         </LoadingProgressIndicator>
       </div>
     );

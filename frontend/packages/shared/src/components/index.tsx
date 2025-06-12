@@ -10,6 +10,7 @@ export {
 export type { AutocompleteValue } from './ComboBox/ComboBox';
 export { CustomButton } from './CustomButton/CustomButton';
 export { CustomButtonLink } from './CustomButtonLink/CustomButtonLink';
+export { CustomFAB } from './CustomFAB/CustomFAB';
 export { CustomCircularProgress } from './CustomCircularProgress/CustomCircularProgress';
 export { CustomIconButton } from './CustomIconButton/CustomIconButton';
 export { CustomModal } from './CustomModal/CustomModal';

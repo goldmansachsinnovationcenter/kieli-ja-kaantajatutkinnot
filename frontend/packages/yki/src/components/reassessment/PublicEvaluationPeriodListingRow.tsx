@@ -1,6 +1,6 @@
 import { TableCell, TableRow, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
-import { CustomButton, Text } from 'shared/components';
+import { CustomFAB, Text } from 'shared/components';
 import { Color, Variant } from 'shared/enums';
 import { useWindowProperties } from 'shared/hooks';
 import { DateUtils } from 'shared/utils';
@@ -49,9 +49,8 @@ const PublicEvaluationPeriodListingCellsForPhone = ({
           &ndash;{' '}
           {DateUtils.formatOptionalDate(evaluationPeriod.evaluation_end_date)}
         </Text>
-        <CustomButton
-          color={Color.Secondary}
-          variant={Variant.Outlined}
+        <CustomFAB
+          color="secondary"
           disabled={!evaluationPeriod.open}
           onClick={() => {
             dispatch(storeEvaluationPeriod(evaluationPeriod));
@@ -101,9 +100,8 @@ const PublicEvaluationPeriodListingCellsForDesktop = ({
         {DateUtils.formatOptionalDate(evaluationPeriod.evaluation_end_date)}
       </TableCell>
       <TableCell>
-        <CustomButton
-          color={Color.Secondary}
-          variant={Variant.Outlined}
+        <CustomFAB
+          color="secondary"
           disabled={!evaluationPeriod.open}
           onClick={() => {
             dispatch(storeEvaluationPeriod(evaluationPeriod));

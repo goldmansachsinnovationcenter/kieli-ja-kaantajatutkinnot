@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Trans } from 'react-i18next';
-import { CustomButton, LabeledTextField, Text } from 'shared/components';
+import { CustomFAB, LabeledTextField, Text } from 'shared/components';
 import {
   Color,
   InputAutoComplete,
@@ -63,15 +63,14 @@ const SubmitButton = ({ onSubmit }: { onSubmit: () => void }) => {
   });
 
   return (
-    <CustomButton
+    <CustomFAB
       className="public-registration__grid__form-container__registration-button"
-      variant={Variant.Contained}
-      color={Color.Secondary}
+      color="secondary"
       onClick={onSubmit}
-      fullWidth={isPhone}
+      size={isPhone ? "large" : "medium"}
     >
       {t('emailButtonText')}
-    </CustomButton>
+    </CustomFAB>
   );
 };
 

@@ -1,4 +1,4 @@
-import { CustomButton, LoadingProgressIndicator } from 'shared/components';
+import { CustomFAB, LoadingProgressIndicator } from 'shared/components';
 import { APIResponseStatus, Color, Variant } from 'shared/enums';
 import { StringUtils } from 'shared/utils';
 
@@ -36,15 +36,14 @@ export const BottomControls = ({
   return (
     <div className="columns flex-end">
       <LoadingProgressIndicator isLoading={isLoading}>
-        <CustomButton
+        <CustomFAB
           data-testid="clerk-new-interpreter-page__save-button"
-          variant={Variant.Contained}
-          color={Color.Secondary}
+          color="secondary"
           onClick={onSave}
           disabled={isSaveButtonDisabled()}
         >
           {translateCommon('save')}
-        </CustomButton>
+        </CustomFAB>
       </LoadingProgressIndicator>
     </div>
   );

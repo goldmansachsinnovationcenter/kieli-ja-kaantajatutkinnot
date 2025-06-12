@@ -4,7 +4,7 @@ import {
 } from '@mui/icons-material';
 import { AppBar, Toolbar } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { CustomButton, LoadingProgressIndicator } from 'shared/components';
+import { CustomButton, CustomFAB, LoadingProgressIndicator } from 'shared/components';
 import { APIResponseStatus, Color, Severity, Variant } from 'shared/enums';
 import { useDialog, useWindowProperties } from 'shared/hooks';
 
@@ -134,16 +134,14 @@ export const ControlButtons = ({
           translateCommon={translateCommon}
           isLoading={isLoading}
         >
-          <CustomButton
-            variant={Variant.Contained}
-            color={Color.Secondary}
+          <CustomFAB
+            color="secondary"
             onClick={onContactRequestSubmit}
             data-testid="contact-request-page__submit-btn"
-            endIcon={<ArrowForwardIcon />}
             disabled={disableNext || isLoading}
           >
-            {translateCommon('send')}
-          </CustomButton>
+            <ArrowForwardIcon />
+          </CustomFAB>
         </LoadingProgressIndicator>
       ) : (
         <CustomButton

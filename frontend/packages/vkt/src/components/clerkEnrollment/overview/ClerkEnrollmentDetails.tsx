@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { CustomButton, CustomModal } from 'shared/components';
+import { CustomFAB, CustomModal } from 'shared/components';
 import { APIResponseStatus, Color, Severity, Variant } from 'shared/enums';
 import { useDialog, useToast } from 'shared/hooks';
 import { StringUtils } from 'shared/utils';
@@ -285,15 +285,14 @@ export const ClerkEnrollmentDetails = () => {
         }
       />
       <div className="columns flex-end margin-top-xxl">
-        <CustomButton
+        <CustomFAB
           data-testid="clerk-enrollment-details__cancel-enrollment-button"
-          variant={Variant.Contained}
-          color={Color.Error}
+          color="error"
           onClick={handleCancelEnrollmentButtonClick}
           disabled={enrollmentDetails.status === EnrollmentStatus.CANCELED}
         >
           {t('cancelEnrollment')}
-        </CustomButton>
+        </CustomFAB>
       </div>
     </>
   );

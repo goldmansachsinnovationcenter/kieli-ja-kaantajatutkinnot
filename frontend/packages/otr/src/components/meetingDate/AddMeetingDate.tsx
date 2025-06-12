@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 import { useState } from 'react';
 import {
-  CustomButton,
+  CustomFAB,
   CustomDatePicker,
   LoadingProgressIndicator,
   Text,
@@ -85,16 +85,14 @@ export const AddMeetingDate = () => {
           />
           <LoadingProgressIndicator isLoading={isAddMeetingDateLoading}>
             <div className="columns gapped-xs">
-              <CustomButton
+              <CustomFAB
                 data-testid="meeting-dates-page__add-btn"
-                variant={Variant.Outlined}
-                color={Color.Secondary}
-                startIcon={<AddIcon />}
+                color="secondary"
                 disabled={isAddButtonDisabled()}
                 onClick={handleAddDate}
               >
-                {t('buttons.add')}
-              </CustomButton>
+                <AddIcon />
+              </CustomFAB>
               {renderDateAlreadyTakenInfo()}
             </div>
           </LoadingProgressIndicator>

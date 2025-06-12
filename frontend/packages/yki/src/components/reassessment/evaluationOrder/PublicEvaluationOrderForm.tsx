@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CustomButton, H2, LabeledTextField, Text } from 'shared/components';
+import { CustomButton, CustomFAB, H2, LabeledTextField, Text } from 'shared/components';
 import {
   APIResponseStatus,
   Color,
@@ -350,14 +350,13 @@ const ActionButtons = () => {
 
   return (
     <div className="public-evaluation-order-page__order-form__action-buttons gapped-xs">
-      <CustomButton
-        variant={Variant.Contained}
-        color={Color.Secondary}
+      <CustomFAB
+        color="secondary"
         onClick={handleSubmitAction}
-        fullWidth={isPhone}
+        sx={{ width: isPhone ? '100%' : 'auto' }}
       >
         {t('pay')}
-      </CustomButton>
+      </CustomFAB>
       <CustomButton
         variant={Variant.Text}
         color={Color.Secondary}

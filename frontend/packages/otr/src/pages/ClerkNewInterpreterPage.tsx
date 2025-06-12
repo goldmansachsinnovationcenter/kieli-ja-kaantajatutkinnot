@@ -2,7 +2,7 @@ import { Add as AddIcon } from '@mui/icons-material';
 import { Box, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { CustomButton, CustomModal, H1, H2 } from 'shared/components';
+import { CustomFAB, CustomModal, H1, H2 } from 'shared/components';
 import { APIResponseStatus, Color, Severity, Variant } from 'shared/enums';
 import { useDialog, useToast } from 'shared/hooks';
 
@@ -184,15 +184,13 @@ export const ClerkNewInterpreterPage = () => {
           </CustomModal>
           <div className="columns margin-top-sm space-between">
             <H2>{t('addedQualificationsTitle')}</H2>
-            <CustomButton
+            <CustomFAB
               data-testid="clerk-new-interpreter-page__add-qualification-button"
-              variant={Variant.Contained}
-              color={Color.Secondary}
-              startIcon={<AddIcon />}
+              color="secondary"
               onClick={handleOpenModal}
             >
-              {t('modalTitle.addQualification')}
-            </CustomButton>
+              <AddIcon />
+            </CustomFAB>
           </div>
           {interpreter.qualifications.length > 0 && (
             <QualificationListing
