@@ -69,7 +69,7 @@ const PublicEvaluationPeriodListingCellsForPhone = ({
                   evaluationPeriod.evaluation_start_date,
                 ),
               })}
-        </CustomButton>
+        </CustomFAB>
       </div>
     </TableCell>
   );
@@ -120,7 +120,7 @@ const PublicEvaluationPeriodListingCellsForDesktop = ({
                   evaluationPeriod.evaluation_start_date,
                 ),
               })}
-        </CustomButton>
+        </CustomFAB>
       </TableCell>
     </>
   );

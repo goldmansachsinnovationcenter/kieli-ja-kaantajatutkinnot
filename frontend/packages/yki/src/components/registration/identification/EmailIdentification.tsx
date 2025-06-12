@@ -67,7 +67,7 @@ const SubmitButton = ({ onSubmit }: { onSubmit: () => void }) => {
       className="public-registration__grid__form-container__registration-button"
       color="secondary"
       onClick={onSubmit}
-      size={isPhone ? "large" : "medium"}
+      size={isPhone ? 'large' : 'medium'}
     >
       {t('emailButtonText')}
     </CustomFAB>
