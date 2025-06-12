@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import { CustomButton, CustomFAB, LoadingProgressIndicator } from 'shared/components';
+import {
+  CustomButton,
+  CustomFAB,
+  LoadingProgressIndicator,
+} from 'shared/components';
 import { Color, Variant } from 'shared/enums';
 
 import { useCommonTranslation, usePublicTranslation } from 'configs/i18n';
