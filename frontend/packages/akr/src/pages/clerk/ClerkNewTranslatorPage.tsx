@@ -2,7 +2,13 @@ import { Add as AddIcon } from '@mui/icons-material';
 import { Box, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { CustomButton, CustomFAB, CustomModal, H1, H2 } from 'shared/components';
+import {
+  CustomButton,
+  CustomFAB,
+  CustomModal,
+  H1,
+  H2,
+} from 'shared/components';
 import { APIResponseStatus, Color, Severity, Variant } from 'shared/enums';
 import { useDialog, useToast } from 'shared/hooks';
 import { StringUtils } from 'shared/utils';

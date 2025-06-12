@@ -4,7 +4,11 @@ import {
 } from '@mui/icons-material';
 import { AppBar, Toolbar } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { CustomButton, CustomFAB, LoadingProgressIndicator } from 'shared/components';
+import {
+  CustomButton,
+  CustomFAB,
+  LoadingProgressIndicator,
+} from 'shared/components';
 import { APIResponseStatus, Color, Severity, Variant } from 'shared/enums';
 import { useDialog, useWindowProperties } from 'shared/hooks';
 

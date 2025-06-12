@@ -1,6 +1,10 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { FC } from 'react';
-import { CustomButton, CustomFAB, LoadingProgressIndicator } from 'shared/components';
+import {
+  CustomButton,
+  CustomFAB,
+  LoadingProgressIndicator,
+} from 'shared/components';
 import { APIResponseStatus, Color, Variant } from 'shared/enums';
 
 import { useCommonTranslation } from 'configs/i18n';
