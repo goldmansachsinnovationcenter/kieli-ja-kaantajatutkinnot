@@ -3,7 +3,6 @@ import { Trans } from 'react-i18next';
 import { CustomFAB, H2, LabeledTextField, Text } from 'shared/components';
 import {
   APIResponseStatus,
-  Color,
   CustomTextFieldErrors,
   InputAutoComplete,
   Severity,

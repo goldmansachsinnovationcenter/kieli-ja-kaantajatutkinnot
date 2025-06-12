@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react';
 import { Trans } from 'react-i18next';
 import { CustomFAB, LabeledTextField, Text } from 'shared/components';
 import {
-  Color,
   InputAutoComplete,
   Severity,
   TextFieldTypes,

@@ -1,7 +1,6 @@
 import { TableCell, TableRow, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { CustomFAB, Text } from 'shared/components';
-import { Color, Variant } from 'shared/enums';
 import { useWindowProperties } from 'shared/hooks';
 import { DateUtils } from 'shared/utils';
 
