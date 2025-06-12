@@ -1,6 +1,10 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { FC } from 'react';
-import { CustomButton, LoadingProgressIndicator } from 'shared/components';
+import {
+  CustomButton,
+  CustomFAB,
+  LoadingProgressIndicator,
+} from 'shared/components';
 import { APIResponseStatus, Color, Variant } from 'shared/enums';
 
 import { useClerkTranslation, useCommonTranslation } from 'configs/i18n';
@@ -36,23 +40,20 @@ export const ControlButtons: FC<ControlButtonsProps> = ({
   if (isViewMode) {
     return (
       <div className="columns gapped">
-        <CustomButton
+        <CustomFAB
           data-testid="clerk-enrollment-details__move-button"
-          variant={Variant.Contained}
-          color={Color.Secondary}
+          color="secondary"
           onClick={onMove}
         >
           {t('move')}
-        </CustomButton>
-        <CustomButton
+        </CustomFAB>
+        <CustomFAB
           data-testid="clerk-enrollment-details__edit-button"
-          variant={Variant.Contained}
-          color={Color.Secondary}
-          startIcon={<EditIcon />}
+          color="secondary"
           onClick={onEdit}
         >
-          {translateCommon('edit')}
-        </CustomButton>
+          <EditIcon />
+        </CustomFAB>
       </div>
     );
   } else {
@@ -68,15 +69,14 @@ export const ControlButtons: FC<ControlButtonsProps> = ({
           {translateCommon('cancel')}
         </CustomButton>
         <LoadingProgressIndicator isLoading={isLoading}>
-          <CustomButton
+          <CustomFAB
             data-testid="clerk-enrollment-details__save-button"
-            variant={Variant.Contained}
-            color={Color.Secondary}
+            color="secondary"
             onClick={onSave}
             disabled={isLoading || !hasRequiredDetails}
           >
             {translateCommon('save')}
-          </CustomButton>
+          </CustomFAB>
         </LoadingProgressIndicator>
       </div>
     );

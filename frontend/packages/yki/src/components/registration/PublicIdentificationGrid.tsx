@@ -1,5 +1,12 @@
 import { Grid, Paper } from '@mui/material';
-import { CustomButton, H1, H2, HeaderSeparator, Text } from 'shared/components';
+import {
+  CustomButton,
+  CustomFAB,
+  H1,
+  H2,
+  HeaderSeparator,
+  Text,
+} from 'shared/components';
 import { Color, Variant } from 'shared/enums';
 import { useWindowProperties } from 'shared/hooks';
 
@@ -49,10 +56,9 @@ const AlreadyLoggedIn = () => {
       </Text>
       <Text>{t('alreadyLoggedIn.reauthenticate')}</Text>
       <div className="rows gapped-xs align-items-center">
-        <CustomButton
+        <CustomFAB
           aria-label={t('alreadyLoggedIn.labels.continueToRegistration')}
-          variant={Variant.Contained}
-          color={Color.Secondary}
+          color="secondary"
           className="fit-content-max-width"
           size="large"
           href={AppRoutes.ExamSessionRegistration.replace(
@@ -61,7 +67,7 @@ const AlreadyLoggedIn = () => {
           )}
         >
           {t('alreadyLoggedIn.labels.continueToRegistration')}
-        </CustomButton>
+        </CustomFAB>
         <CustomButton
           aria-label={t('alreadyLoggedIn.labels.abort')}
           variant={Variant.Text}

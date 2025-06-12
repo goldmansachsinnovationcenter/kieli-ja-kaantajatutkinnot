@@ -1,4 +1,4 @@
-import { CustomButton } from 'shared/components';
+import { CustomFAB } from 'shared/components';
 import { Color, Variant } from 'shared/enums';
 import { CommonUtils } from 'shared/utils';
 
@@ -19,15 +19,14 @@ export const ContactRequestButton = () => {
   };
 
   return (
-    <CustomButton
-      color={Color.Secondary}
-      variant={Variant.Contained}
+    <CustomFAB
+      color="secondary"
       onClick={handleButtonClick}
       disabled={selectedTranslators.length == 0}
       data-testid="public-translators__contact-request-btn"
       aria-label={t('requestContactAriaLabel')}
     >
       {t('requestContact')}
-    </CustomButton>
+    </CustomFAB>
   );
 };

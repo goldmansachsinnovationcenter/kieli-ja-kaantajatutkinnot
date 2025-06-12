@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
-import { CustomButton, H2, LabeledTextField, Text } from 'shared/components';
+import { CustomFAB, H2, LabeledTextField, Text } from 'shared/components';
 import {
   APIResponseStatus,
-  Color,
   CustomTextFieldErrors,
   InputAutoComplete,
   Severity,
@@ -190,16 +189,14 @@ export const EnrollToQueue = () => {
             <div className="columns gapped-xxl">{getInputFields()}</div>
           )}
           <div className="columns">
-            <CustomButton
+            <CustomFAB
               className="full-max-width"
-              color={Color.Secondary}
-              variant={Variant.Contained}
+              color="secondary"
               onClick={handleSubmit}
               disabled={isLoading}
-              fullWidth={isPhone}
             >
               {t('inputs.submit.label')}
-            </CustomButton>
+            </CustomFAB>
           </div>
         </>
       );

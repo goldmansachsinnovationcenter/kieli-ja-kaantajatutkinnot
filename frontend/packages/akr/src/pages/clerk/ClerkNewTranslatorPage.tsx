@@ -2,7 +2,13 @@ import { Add as AddIcon } from '@mui/icons-material';
 import { Box, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { CustomButton, CustomModal, H1, H2 } from 'shared/components';
+import {
+  CustomButton,
+  CustomFAB,
+  CustomModal,
+  H1,
+  H2,
+} from 'shared/components';
 import { APIResponseStatus, Color, Severity, Variant } from 'shared/enums';
 import { useDialog, useToast } from 'shared/hooks';
 import { StringUtils } from 'shared/utils';
@@ -210,15 +216,13 @@ export const ClerkNewTranslatorPage = () => {
           </CustomModal>
           <div className="columns margin-top-sm space-between">
             <H2>{t('addedAuthorisationsTitle')}</H2>
-            <CustomButton
+            <CustomFAB
               data-testid="clerk-new-translator-page__add-authorisation-button"
-              variant={Variant.Contained}
-              color={Color.Secondary}
-              startIcon={<AddIcon />}
+              color="secondary"
               onClick={handleOpenModal}
             >
-              {t('modalTitle.addAuthorisation')}
-            </CustomButton>
+              <AddIcon />
+            </CustomFAB>
           </div>
           {translator.authorisations.length ? (
             <AuthorisationListing
